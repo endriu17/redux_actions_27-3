@@ -50,7 +50,7 @@ function addComment(text) {
 function removeComment(id) {
   return {
     type: REMOVE_COMMENT,
-    id: comment.id
+    id
   }
 }
 
@@ -58,7 +58,7 @@ function editComment(id, text) {
   return {
     type: EDIT_COMMENT,
     text,
-    id: comment.id
+    id
   }
 }
 
