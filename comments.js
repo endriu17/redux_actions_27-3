@@ -9,45 +9,36 @@ import {
 export default function comments(state = [], action) {
     switch(action.type) {
         case ADD_COMMENT:
-            return Object.assign({}, state, {
-                comments: [
+            return [
                 {
                     id: action.id,
                     text: action.text,
                     votes: 0
                 }
-                , ...state.comments]
-            })
+                , ...state
+            ]
         case REMOVE_COMMENT:
-            return Object.assign({}, state, {
-                comments: state.comments.filter(comment => comment.id !== action.id)
-            })
+            return state.filter(comment => comment.id !== action.id)
         case EDIT_COMMENT:
-            return Object.assign({}, state, {
-                comments: state.comments.map(comment => {
-                    if (comment.id === action.id){
-                        comment.text = action.text;
-                    }
-                    return comment;
-                })
+            return state.map(comment => {
+                if (comment.id === action.id){
+                    comment.text = action.text;
+                }
+                return comment;
             })
         case THUMB_UP_COMMENT:
-            return Object.assign({}, state, {
-                comments: state.comments.map(comment => {
-                    if (comment.id === action.id){
-                        comment.votes++;
-                    }
-                    return comment;
-                })
+            return state.map(comment => {
+                if (comment.id === action.id){
+                    comment.votes++;
+                }
+                return comment;
             })
         case THUMB_DOWN_COMMENT:
-            return Object.assign({}, state, {
-                comments: state.comments.map(comment => {
-                    if (comment.id === action.id){
-                        comment.votes--;
-                    }
-                    return comment;
-                })
+            return state.map(comment => {
+                if (comment.id === action.id){
+                    comment.votes--;
+                }
+                return comment;
             })
         default:
             return state;
